@@ -95,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 alias g++='g++ -std=c++11 -O2 -Wall -Wextra -Wconversion'
 alias prev='open -a Preview'
 alias clang++='clang++ -std=c++11 -O2 -Wall'
-alias vv='clang++ -std=c++11 -O2 -Wall -o a' # example
+alias xx='clang++ -std=c++11 -O2 -Wall -o x' # example
 alias info='info --vi-keys'
 alias cd..='cd ..'
 # ls aliases

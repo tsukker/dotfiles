@@ -92,10 +92,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias g++='g++ -std=c++11 -O2 -Wall -Wextra -Wconversion'
+alias g++='g++ -std=c++14 -O2 -Wall -Wextra'
 alias prev='open -a Preview'
-alias clang++='clang++ -std=c++11 -O2 -Wall'
-alias xx='clang++ -std=c++11 -O2 -Wall -o x' # example
+alias clang++='clang++ -std=c++14 -O2 -Wall -Wextra'
+alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example
 alias info='info --vi-keys'
 alias cd..='cd ..'
 # ls aliases

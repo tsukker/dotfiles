@@ -27,7 +27,7 @@ colorscheme solarized
 
 set expandtab " use space instead tab
 " set tabstop=2 " 2-tab
-set shiftwidth=2
+set shiftwidth=4
 set smartindent " indent based on the last part of the previous line
 " set autoindent " indent as the same as the previous line
 
@@ -41,6 +41,13 @@ set nowrap " orikaesanai
 inoremap <silent> jj <ESC>
 
 nnoremap Q :wq
+
+command! C call s:C()
+nmap <F5> :C<CR>
+function! s:C()
+  :w
+  :!clang++ -std=c++14 -O2 -Wall -Wextra -o x %
+:endfunction
 
 nmap <C-K> <Plug>(caw:i:toggle)
 vmap <C-K> <Plug>(caw:i:toggle)

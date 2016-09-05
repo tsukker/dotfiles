@@ -101,12 +101,8 @@ alias cd..='cd ..'
 # ls aliases
 alias ls='ls'
 alias ls='ls -hFG'
-alias lsa='ls -lAh'  # cf.
-alias l='ls -lAh'    # ~/.oh-my-zsh/
-alias ll='ls -lh'    # lib/
-alias la='ls -lAh'   # directories.zsh
-alias a='ls -Ah'
-alias lt='ls -lAhT'
+alias la='ls -hFG -lA -T'
+alias lt='ls -hFG -lAT'
 
 # suffix alias
 alias -s rb='ruby'

@@ -1,53 +1,82 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/shunsuke/.oh-my-zsh
+## prompt settings
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="skaro"
-#ZSH_THEME="darkblood"
-#ZSH_THEME="frontcube"
-#ZSH_THEME="juanghurtado"
-ZSH_THEME="robbyskarohurtado"
+setopt prompt_subst
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+zstyle ":vcs_info:*" enable git
+zstyle ":vcs_info:*" get-revision true # %i, git hash revision
+zstyle ':vcs_info:*' max-exports 3
+zstyle ":vcs_info:git:*" stagedstr "<S>" # %c
+zstyle ":vcs_info:git:*" unstagedstr "<U>" # %u
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' formats \
+    "(%F{magenta}%b%f)" \
+    "%c%u" "%i"
+zstyle ':vcs_info:*' actionformats \
+    "(%F{magenta}%b%f) %F{red}!%f%a" \
+    "%c%u" \
+    "%i"
 
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=5
+my_git_info_push () {
+  if [ "$(git remote 2>/dev/null)" != "" ]; then
+    local head="$(git rev-parse HEAD)"
+    local remote
+    for remote in $(git rev-parse --remotes) ; do
+      if [ "$head" = "$remote" ]; then return 0 ; fi
+    done
+    # pushしていないcommitがあることを示す文字列
+    echo "<P>"
+  fi
+}
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# git：stashに退避したものがあるかチェックする
+my_git_info_stash () {
+  if [ "$(git stash list 2>/dev/null)" != "" ]; then
+    # stashがあることを示す文字列
+    echo "{s}"
+  fi
+}
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+left_vcs_info () {
+  vcs_info
+  if [ "$vcs_info_msg_0_" = "" ]; then
+    return 0
+  fi
+  echo $vcs_info_msg_0_" "
+}
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+indicator_vcs_info () {
+  vcs_info
+  local indicator=$(my_git_info_stash)$vcs_info_msg_1_$(my_git_info_push)
+  if [ "$indicator" != "" ]; then
+    indicator=$indicator" "
+  fi
+  echo $indicator
+}
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+hash_revision_vcs_info () {
+  vcs_info
+  if [ "$vcs_info_msg_2_" = "" ]; then
+    return 0
+  fi
+  local short=$vcs_info_msg_2_
+  short=${short:0:7}
+  echo "[%F{yellow}"$short"%f]"
+}
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+RPROMPT='$(indicator_vcs_info)'
+RPROMPT+='$(hash_revision_vcs_info)'
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-HIST_STAMPS="yyyy-mm-dd"
+PROMPT='%F{blue}%~%f '
+PROMPT+='$(left_vcs_info)'
+PROMPT+='%(?,%F{cyan}$%f,%F{red}$%f) '
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+function _precmd_vcs_info () {
+  LANG=en_US.UTF-8 vcs_info
+}
+add-zsh-hook precmd _precmd_vcs_info
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-# User configuration
+## prompt setting end
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -65,8 +94,6 @@ if [ -d "$GHC_DOT_APP" ]; then
   export PATH="${HOME}/.local/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 fi
 
-source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -76,21 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias g++='g++ -std=c++14 -O2 -Wall -Wextra'
 alias prev='open -a Preview'
@@ -142,12 +154,12 @@ zshaddhistory() {
   local cmd=${line%% *}
 
   # 以下の条件をすべて満たすものだけをヒストリに追加する
-  [[ ${cmd} != (l|a|l[sal]|lsa)
+  [[ ${cmd} != (l[sa])
   && ${cmd} != (man)
   && ${cmd} != (pwd)
   && ${cmd} != (which)
   && ${cmd} != (info)
-##  && ${cmd} != (cat)
   && ${cmd} != (clnag++)
+  && ${cmd} != (history)
   ]]
 }

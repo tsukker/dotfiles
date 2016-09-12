@@ -18,13 +18,16 @@ filetype plugin indent off
 " ##### prefernce of displaying #####
 set number " number of line
 set title " filename of current
-set showmatch " kakko
+set showmatch " brackets
+set nowrap " don't wrap lines
+" set wrapscan " wrap lines
 
 let g:solarized_termtrans=1
-syntax on " coloring
 set background=dark
 colorscheme solarized
+syntax on " coloring
 
+" ##### preference of indent #####
 set expandtab " use space instead tab
 " set tabstop=2 " 2-tab
 set shiftwidth=4
@@ -35,11 +38,12 @@ set smartindent " indent based on the last part of the previous line
 " ##### prefernce of search #####
 set ignorecase " ignore difference between UPPER and lower
 set smartcase " NOT ignore only if including UPPER
-" set wrapscan " back to the first from the last (orikaeshi)
 
-set nowrap " orikaesanai
+" ##### preference of mouse use #####
+set mouse=a
+
+" ##### my unique settings #####
 inoremap <silent> jj <ESC>
-
 nnoremap Q :wq
 
 command! C call s:C()

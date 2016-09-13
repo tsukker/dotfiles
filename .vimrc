@@ -40,7 +40,7 @@ set ignorecase " ignore difference between UPPER and lower
 set smartcase " NOT ignore only if including UPPER
 
 " ##### preference of mouse use #####
-set mouse=a
+" set mouse=a
 
 " ##### my unique settings #####
 inoremap <silent> jj <ESC>

@@ -33,7 +33,9 @@ fi
 zplug load --verbose
 
 autoload -U compinit && compinit
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+#zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}' '+m:{-_}={_-}' '+l:|=*'
+## TODO: set substitution in regular expression
 
 ## prompt settings
 

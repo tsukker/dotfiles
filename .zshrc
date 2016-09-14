@@ -37,6 +37,10 @@ autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}' '+m:{-_}={_-}' '+l:|=*'
 ## TODO: set substitution in regular expression
 
+## title bar settings
+# show current directory
+precmd() { eval 'echo -ne "\033]0;$PWD\007"' }
+
 ## prompt settings
 
 setopt prompt_subst

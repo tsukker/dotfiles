@@ -30,9 +30,10 @@ syntax on " coloring
 " ##### preference of indent #####
 set expandtab " use space instead tab
 " set tabstop=2 " 2-tab
-set shiftwidth=4
+set shiftwidth=2
 set smartindent " indent based on the last part of the previous line
 " set autoindent " indent as the same as the previous line
+set cinoptions+=:0,g0
 
 
 " ##### prefernce of search #####

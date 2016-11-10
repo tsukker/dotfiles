@@ -137,8 +137,12 @@ if [ -d "$GHC_DOT_APP" ]; then
   export PATH="${HOME}/.local/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 fi
 
-# This seems to add to PATH
+## These settings add to PATH
+# rbenv settings
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# pyenv settings
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+alias brew="env PATH=${PATH/\/Users\/shunsuke\/\.pyenv\/shims:/} brew"
 
 
 # You may need to manually set your language environment
@@ -156,6 +160,7 @@ export TERM=xterm-256color
 
 alias g++='g++ -std=c++14 -O2 -Wall -Wextra'
 alias prev='open -a Preview'
+alias clang='clang -O2 -Wall'
 alias clang++='clang++ -std=c++14 -O2 -Wall -Wextra'
 alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example
 alias info='info --vi-keys'

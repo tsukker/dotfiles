@@ -10,6 +10,8 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=10000000
 # The number of histsize
 export SAVEHIST=10000000
+# Change history view
+HIST_STAMPS="yyyy-mm-dd"
 # Do not save if the same one is already in history file
 setopt hist_ignore_dups
 # Share history with other zsh

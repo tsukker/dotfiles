@@ -131,12 +131,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/texbin"
 # refer: /etc/paths.d/TeX
 
-# Add GHC 7.10.2 to the PATH, via https://ghcformacosx.github.io/
-export GHC_DOT_APP="/Applications/ghc-7.10.2.app"
-if [ -d "$GHC_DOT_APP" ]; then
-  export PATH="${HOME}/.local/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
-fi
-
 ## These settings add to PATH
 # rbenv settings
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -159,12 +153,12 @@ export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
 alias g++='g++ -std=c++14 -O2 -Wall -Wextra'
-alias prev='open -a Preview'
-alias clang='clang -O2 -Wall'
+alias clang='clang -std=c11 -O2 -Wall'
 alias clang++='clang++ -std=c++14 -O2 -Wall -Wextra'
 alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example
 alias info='info --vi-keys'
 alias cd..='cd ..'
+alias diff colordiff
 # ls aliases
 alias ls='ls'
 alias ls='ls -hFG'

@@ -158,7 +158,8 @@ alias clang++='clang++ -std=c++14 -O2 -Wall -Wextra'
 alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example
 alias info='info --vi-keys'
 alias cd..='cd ..'
-alias diff colordiff
+alias diff=colordiff
+alias rm=rmtrash
 # ls aliases
 alias ls='ls'
 alias ls='ls -hFG'

@@ -131,6 +131,10 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/texbin"
 # refer: /etc/paths.d/TeX
 
+# ndenv
+export PATH="$HOME/.ndenv/bin:$PATH"
+eval "$(ndenv init -)"
+
 ## These settings add to PATH
 # rbenv settings
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -152,9 +156,10 @@ export LANG=en_US.UTF-8
 # for tmux
 export TERM=xterm-256color
 
-alias g++='g++ -std=c++14 -O2 -Wall -Wextra'
+alias gww='g++ -std=c++14 -O2 -Wall -Wextra'
 alias clang='clang -std=c11 -O2 -Wall'
-alias clang++='clang++ -std=c++14 -O2 -Wall -Wextra'
+alias clangww='clang++ -std=c++14 -O2 -Wall -Wextra'
+alias clang++_atcoder='clang++ -I/usr/local/include/c++/v1 -L/usr/local/lib -I/opt/local/include/boost -L/opt/local/lib -std=c++14 -stdlib=libc++ -O2 -Wall -Wextra'
 alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example
 alias info='info --vi-keys'
 alias cd..='cd ..'
@@ -179,3 +184,13 @@ function runcc() {
 # Omission of cd & ls
 setopt auto_cd
 function chpwd() { ls }
+
+function peco-history-selection() {
+  BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+

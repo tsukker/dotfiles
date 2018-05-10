@@ -19,7 +19,7 @@ filetype plugin indent off
 set number " number of line
 set title " filename of current
 set showmatch " brackets
-set nowrap " don't wrap lines
+" set nowrap " don't wrap lines
 " set wrapscan " wrap lines
 
 let g:solarized_termtrans=1
@@ -46,6 +46,11 @@ set smartcase " NOT ignore only if including UPPER
 " ##### my unique settings #####
 inoremap <silent> jj <ESC>
 nnoremap Q :wq
+
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
 
 command! C call s:C()
 nmap <F5> :C<CR>

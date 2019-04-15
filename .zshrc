@@ -139,9 +139,11 @@ eval "$(ndenv init -)"
 # rbenv settings
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # pyenv settings
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-alias brew="env PATH=${PATH/\/Users\/shunsuke\/\.pyenv\/shims:/} brew"
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#alias brew="env PATH=${PATH/\/Users\/shunsuke\/\.pyenv\/shims:/} brew"
 
+# Android SDK
+# export PATH="$PATH:/Users/shunsuke/Library/Android/sdk/platform-tools"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8

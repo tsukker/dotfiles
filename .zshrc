@@ -22,8 +22,7 @@ zplug "zsh-users/zsh-completions"
 
 zplug "zsh-users/zsh-history-substring-search"
 
-zplug "zsh-users/zsh-syntax-highlighting", \
-    nice:19
+zplug "zsh-users/zsh-syntax-highlighting"
 
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "

@@ -159,7 +159,7 @@ export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
 alias gww='g++ -std=c++14 -O2 -Wall -Wextra'
-alias clang='clang -std=c11 -O2 -Wall'
+#alias clang='clang -std=c11 -O2 -Wall'
 alias clangww='clang++ -std=c++14 -O2 -Wall -Wextra'
 alias clang++_atcoder='clang++ -I/usr/local/include/c++/v1 -L/usr/local/lib -I/opt/local/include/boost -L/opt/local/lib -std=c++14 -stdlib=libc++ -O2 -Wall -Wextra'
 alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example

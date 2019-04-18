@@ -1,14 +1,14 @@
 if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+"  if &compatible
+"    set nocompatible               " Be iMproved
+"  endif
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 call neobundle#begin(expand('~/.vim/bundle'))
 
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc.git'
+"NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundle 'Shougo/vimproc.git'
 
 call neobundle#end()
 
@@ -41,12 +41,14 @@ set cinoptions+=:0,g0
 " ##### prefernce of search #####
 set ignorecase " ignore difference between UPPER and lower
 set smartcase " NOT ignore only if including UPPER
+set incsearch " Incremental search
 
 " ##### preference of mouse use #####
 " set mouse=a
 
 " ##### my unique settings #####
 inoremap <silent> jj <ESC>
+" inoremap <silent> jj <ESC>:<C-u>w<CR>
 nnoremap Q :wq
 
 nnoremap j gj
@@ -66,3 +68,4 @@ vmap <C-K> <Plug>(caw:i:toggle)
 
 " enable :filetype settings
 filetype plugin indent on
+

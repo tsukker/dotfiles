@@ -9,13 +9,15 @@ let g:lightline={
     \ 'colorscheme': 'solarized',
     \ }
 
-" Style : indent, whitespace, linter
+" Style : indent, whitespace
 Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup=1
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'w0rp/ale'
+
+" linter
+Plug 'w0rp/ale', { 'on': 'ALEToggle' }
 
 " Auto completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -29,10 +31,11 @@ inoremap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
 
 " Git
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', { 'on': 'Gstatus' }
 
-" WIP
-Plug 'junegunn/fzf'
+" Search for Commands
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim', { 'on': 'Commands' }
 
 call plug#end()
 
@@ -71,4 +74,3 @@ function! s:C()
   :w
   :!clang++ -std=c++17 -O2 -Wall -Wextra -o x %
 :endfunction
-

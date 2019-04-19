@@ -193,6 +193,7 @@ function peco-history-selection() {
   zle reset-prompt
 }
 
+# Ctrl+R -> peco
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 

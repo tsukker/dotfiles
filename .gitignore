@@ -3,6 +3,8 @@
 *.swp
 *.swo
 
+.vim/bundle/
+
 excluded
 .netrwhist
 

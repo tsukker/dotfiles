@@ -28,3 +28,8 @@ Install apps:
     $ git clone 'https://github.com/tsukker/dotfiles.git'
     $ cd dotfiles
     $ sh ./macos.sh
+
+#### Neovim
+
+    :PlugInstall
+    :PlugStatus

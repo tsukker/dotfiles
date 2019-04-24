@@ -11,6 +11,7 @@ do
 done
 
 # XDG Base Directory Specification
+mkdir ~/.config > /dev/null 2>&1
 configdirs="nvim"
 for dir in $configdirs
 do

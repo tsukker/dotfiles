@@ -139,6 +139,23 @@ defaults write -g InitialKeyRepeat -int 13
 
 # Keyboard shortcut settings seem to be difficult to configure by defaults command
 
+# IME setting seems to be difficult to configure by defaults command
+
+#defaults write com.apple.HIToolbox AppleEnabledInputSources -array \
+#'{ "Bundle ID" = "com.apple.PressAndHold"; InputSourceKind = "Non Keyboard Input Method"; }' \
+#'{ "Bundle ID" = "com.google.inputmethod.Japanese"; "Input Mode" = "com.apple.inputmethod.Japanese"; InputSourceKind = "Input Mode"; }' \
+#'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }' \
+#'{ "Bundle ID" = "com.google.inputmethod.Japanese"; InputSourceKind = "Keyboard Input Method"; }'
+
+#defaults write com.apple.HIToolbox AppleInputSourceHistory -array \
+#'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }' \
+#'{ "Bundle ID" = "com.google.inputmethod.Japanese"; "Input Mode" = "com.apple.inputmethod.Japanese"; InputSourceKind = "Input Mode"; }'
+
+#defaults write com.apple.HIToolbox AppleSelectedInputSources -array \
+#'{ "Bundle ID" = "com.apple.PressAndHold"; InputSourceKind = "Non Keyboard Input Method"; }' \
+#'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }'
+
+
 #--------------------
 # Mouse
 #--------------------

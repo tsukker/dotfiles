@@ -9,7 +9,7 @@ else
 fi
 
 # Install formula
-brew install gnu-sed neovim python tmux wget zplug
+brew install colordiff gnu-sed neovim python tmux wget zplug
 brew install exiftool ffmpeg mpv numpy pdfpc peco tree youtube-dl
 
 # Neovim: Install vim-plug

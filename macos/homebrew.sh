@@ -10,10 +10,14 @@ fi
 
 # Install formula
 brew install colordiff gnu-sed neovim python tmux wget zplug
-brew install exiftool ffmpeg mpv numpy pdfpc peco tree youtube-dl
+brew install exiftool ffmpeg mpv numpy pdfpc peco rmtrash tree youtube-dl
 
 # Neovim: Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 pip3 install --user pynvim
+
+brew tap homebrew/cask
+brew cask install chromedriver
+brew install geckodriver

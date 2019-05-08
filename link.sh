@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # ln cheat-sheet
 # ln -sf [path of the real file (if relative from symbolic link)] [path of symbolic link (if relative from working directory]
 
 # dotfiles under home directory
-dotfiles=".editorconfig .tmux.conf .vim .vimrc .zshenv .zshrc"
+dotfiles=".editorconfig .tmux.conf .vim .vimrc .zshenv .zshrc .gitignore_global"
 for dotfile in $(echo $dotfiles)
 do
   ln -sf ~/dotfiles/$dotfile ~/

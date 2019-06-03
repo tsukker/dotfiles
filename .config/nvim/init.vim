@@ -54,6 +54,7 @@ set showmatch " brackets
 set expandtab " use space instead of tabs
 set smartindent " indent based on the last part of the previous line
 set autoindent " indent as the same as the previous line
+set cino=:0 " in switch statement don't indent `case val:` line
 
 " ##### prefernce of search #####
 set ignorecase " ignore difference between UPPER and lower

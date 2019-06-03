@@ -256,6 +256,15 @@ sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool fa
 
 # Mouse and Trackpad
 
+# Mouse-keys option
+
+# Use Mouse-keys by pushing Option key five times
+defaults -currentHost write com.apple.universalaccess useMouseKeysShortcutKeys -bool true
+
+# Disable trackpad while using Mouse-keys
+defaults -currentHost write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
+
+
 # Set double click threshold
 defaults write NSGlobalDomain com.apple.mouse.doubleClickThreshold -float 0.2
 

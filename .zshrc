@@ -131,13 +131,12 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/texbin"
 # refer: /etc/paths.d/TeX
 
-# ndenv
-export PATH="$HOME/.ndenv/bin:$PATH"
-eval "$(ndenv init -)"
-
 ## These settings add to PATH
 # rbenv settings
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 # pyenv settings
 #if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 #alias brew="env PATH=${PATH/\/Users\/shunsuke\/\.pyenv\/shims:/} brew"

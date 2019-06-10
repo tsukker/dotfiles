@@ -14,7 +14,7 @@ trim_trailing_whitespace = false
 indent_style = space
 indent_size = 2
 
-[*.{c,cc,cpp,rb,sh,tex}]
+[*.{c,cc,cpp,html,js,rb,sh,tex}]
 indent_style = space
 indent_size = 2
 

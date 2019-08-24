@@ -50,6 +50,9 @@ defaults write com.apple.dock wvous-bl-corner -int 4
 # Dock
 #--------------------
 
+# magnification
+defaults write com.apple.dock magnification -bool true
+
 # size
 defaults write com.apple.dock tilesize -int 40
 defaults write com.apple.dock largesize -int 60
@@ -137,7 +140,17 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 
 defaults write -g InitialKeyRepeat -int 13
 
-# Keyboard shortcut settings seem to be difficult to configure by defaults command
+# Keyboard shortcut settings
+
+# Switching to the next window
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+# input sources
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><false/></dict>"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>106</integer><integer>38</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+# Spotlight
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
 
 # IME setting seems to be difficult to configure by defaults command
 
@@ -154,6 +167,12 @@ defaults write -g InitialKeyRepeat -int 13
 #defaults write com.apple.HIToolbox AppleSelectedInputSources -array \
 #'{ "Bundle ID" = "com.apple.PressAndHold"; InputSourceKind = "Non Keyboard Input Method"; }' \
 #'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }'
+
+
+# Touch Bar
+
+# Hide Siri
+defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.brightness com.apple.system.volume com.apple.system.mute
 
 
 #--------------------
@@ -314,6 +333,9 @@ defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextr
 
 # VPN
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn" -bool false
+
+# Siri
+defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 
 # Show icons on menu bar

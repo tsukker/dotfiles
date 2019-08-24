@@ -319,7 +319,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 # Fast user switch menu, see: Preferences > User & Group > Login option
-defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool false
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool true
 defaults write NSGlobalDomain userMenuExtraStyle -int 2
 
 # Clock

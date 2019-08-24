@@ -319,7 +319,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 # Fast user switch menu, see: Preferences > User & Group > Login option
-defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool true
+# defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool true
 defaults write NSGlobalDomain userMenuExtraStyle -int 2
 
 # Clock
@@ -344,7 +344,6 @@ defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextr
 # Show icons on menu bar
 # Note that the order of icons is statically decided after `killall SystemUIServer`
 defaults write com.apple.systemuiserver menuExtras -array \
-"/System/Library/CoreServices/Menu Extras/User.menu" \
 "/System/Library/CoreServices/Menu Extras/Clock.menu" \
 "/System/Library/CoreServices/Menu Extras/TextInput.menu" \
 "/System/Library/CoreServices/Menu Extras/Battery.menu" \

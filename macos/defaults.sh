@@ -138,7 +138,7 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Decrease key repeat delay
 
-defaults write -g InitialKeyRepeat -int 13
+defaults write NSGlobalDomain InitialKeyRepeat -int 13
 
 # Keyboard shortcut settings
 
@@ -315,6 +315,13 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 # $ defaults read com.apple.systemuiserver
 # see also: /System/Library/CoreServices/Menu\ Extras
 
+# Siri
+defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
+
+# Fast user switch menu, see: Preferences > User & Group > Login option
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool false
+defaults write NSGlobalDomain userMenuExtraStyle -int 2
+
 # Clock
 defaults write com.apple.menuextra.clock DateFormat -string "M\u6708d\u65e5(EEE)  H:mm:ss"
 
@@ -324,7 +331,6 @@ defaults write com.apple.menuextra.textinput ModeNameVisible -bool false
 # Battery
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 
-
 # Bluetooth
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -bool true
 
@@ -333,9 +339,6 @@ defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextr
 
 # VPN
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn" -bool false
-
-# Siri
-defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 
 # Show icons on menu bar

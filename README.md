@@ -24,12 +24,16 @@ Install apps:
 
 #### Configure
 
-    $ cd ~
-    $ git clone 'https://github.com/tsukker/dotfiles.git'
-    $ cd dotfiles
-    $ sh ./macos.sh
+```sh
+cd ~
+git clone 'https://github.com/tsukker/dotfiles.git'
+cd dotfiles
+sh ./macos.sh
+```
 
 #### Neovim
 
-    :PlugInstall
-    :PlugStatus
+```vim
+:PlugInstall
+:PlugStatus
+```

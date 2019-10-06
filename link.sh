@@ -10,6 +10,10 @@ do
   ln -sf ~/dotfiles/$dotfile ~/
 done
 
+# ~/.gitconfig
+git config --global core.excludesfile ~/.gitignore_global  # Apply .gitignore_global
+git config --global core.editor 'vim -c "set fenc=utf-8"'
+
 # XDG Base Directory Specification
 mkdir ~/.config > /dev/null 2>&1
 configdirs="nvim"

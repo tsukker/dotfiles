@@ -127,6 +127,9 @@ add-zsh-hook precmd _precmd_vcs_info
 
 # PATH settings
 
+# Added by homebrew
+export PATH="/usr/local/sbin:$PATH"
+
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
@@ -139,10 +142,6 @@ export PATH="$PATH:/usr/texbin"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
-# pyenv settings
-#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-#alias brew="env PATH=${PATH/\/Users\/shunsuke\/\.pyenv\/shims:/} brew"
 
 # Android SDK
 # export PATH="$PATH:/Users/shunsuke/Library/Android/sdk/platform-tools"
@@ -205,3 +204,8 @@ if [ -f '/Users/shunsuke/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/shunsu
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/shunsuke/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/shunsuke/google-cloud-sdk/completion.zsh.inc'; fi
+
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

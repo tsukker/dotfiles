@@ -1,0 +1,53 @@
+tap "homebrew/cask"
+
+brew "colordiff"
+brew "exiftool"
+brew "geckodriver"
+brew "ghq"
+brew "git"
+brew "gnu-sed"
+brew "go"
+brew "ffmpeg"
+brew "mpv"
+brew "neovim"
+brew "peco"
+brew "pyenv"
+brew "rbenv"
+brew "rmtrash"
+brew "tree"
+brew "wget"
+brew "youtube-dl"
+brew "zplug"
+
+cask "0xed"
+cask "1password"
+cask "alfred"
+cask "amazon-photos"
+cask "chromedriver"
+cask "discord"
+cask "docker"
+cask "firefox"
+cask "github"
+cask "google-chrome"
+cask "google-cloud-sdk"
+cask "google-japanese-ime"
+cask "iina"
+cask "iterm2"
+cask "kindle"
+cask "simple-comic"
+cask "slack"
+cask "sourcetree"
+cask "the-unarchiver"
+cask "virtualbox"
+cask "visual-studio-code"
+cask "vlc"
+cask "wireshark"
+
+# QuickLook Plugins
+cask "betterzip"  # zip
+cask "qlcolorcode"  # code coloring
+cask "qlimagesize"  # Add image size on titlebar
+cask "qlmarkdown"  # MD
+cask "qlstephen"  # Show plain text file even if without filetype extention
+cask "quicklook-json"  # Pretty JSON
+cask "webpquicklook"  # webp

@@ -123,8 +123,9 @@ defaults write com.apple.airplay showInMenuBarIfPresent -bool true
 
 IS_LAPTOP=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book")
 if [[ "$IS_LAPTOP" != "" ]]; then
-  sudo pmset -b displaysleep 5 disksleep 10 sleep 15 lessbright 0 halfdim 1
-  sudo pmset -c displaysleep 180 disksleep 0 sleep 0
+  sudo pmset -b displaysleep 10 sleep 15 lessbright 0
+  sudo pmset -c displaysleep 120 sleep 180
+  sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
 else
   sudo pmset sleep 0 disksleep 0 displaysleep 180 halfdim 1
 fi
@@ -207,7 +208,7 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
 
 # Make click silent (only for MacBook series before 2016)
 # see also: https://support.apple.com/ja-jp/HT204352
-defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
+# defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
 
 # Enable Expose gesture
 defaults write com.apple.dock showAppExposeGestureEnabled -bool true
@@ -535,6 +536,9 @@ defaults write com.apple.dock mru-spaces -bool false
 # Remove shadow from captured screenshots
 defaults write com.apple.screencapture disable-shadow -boolean true
 
+# Change the default directory which screenshots are saved in
+defaults write com.apple.screencapture location ~/Pictures/ScreenShots/
+
 # Enable Touch ID authentication in terminal (require gnu-sed: brew install gnu-sed)
 # if Touch ID is already enabled for sudo command;
 if cat /etc/pam.d/sudo | grep "pam_tid.so" >/dev/null 2>&1; then
@@ -560,4 +564,4 @@ for app in "Activity Monitor" \
 done
 
 echo "Configuration is correctly finished."
-echo "Please reboot the computer to ensure that changes are enabled."
+echo "Please reboot to ensure that changes are enabled."

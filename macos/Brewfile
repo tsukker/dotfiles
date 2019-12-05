@@ -28,12 +28,14 @@ cask "discord"
 cask "docker"
 cask "firefox"
 cask "github"
+cask "google-backup-and-sync"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "google-japanese-ime"
 cask "iina"
 cask "iterm2"
 cask "kindle"
+cask "kitematic"
 cask "simple-comic"
 cask "slack"
 cask "sourcetree"
@@ -48,6 +50,6 @@ cask "betterzip"  # zip
 cask "qlcolorcode"  # code coloring
 cask "qlimagesize"  # Add image size on titlebar
 cask "qlmarkdown"  # MD
-cask "qlstephen"  # Show plain text file even if without filetype extention
+cask "qlstephen"  # Show contents of plain text files even if filetype is not known
 cask "quicklook-json"  # Pretty JSON
 cask "webpquicklook"  # webp

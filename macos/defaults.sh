@@ -9,14 +9,7 @@ osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until this script has finished
-# while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-# Change default shell from bash to zsh
-if [[ $(dscl . -read /Users/$USER UserShell) = "UserShell: /bin/zsh" ]]; then
-  :
-else
-  sudo dscl . -create /Users/$USER UserShell /bin/zsh
-fi
+#while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 #--------------------
 # General
@@ -25,13 +18,13 @@ fi
 # Set dark mode
 defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
 
-# Show scroll bar always
+# Show scroll bars: Always
 defaults write NSGlobalDomain AppleShowScrollBars -string Always
 
-# 書類を閉じるときに変更内容を保持するかどうかを確認する
+# Ask to keep changes when closing documents
 defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
 
-# アプリケーションを終了するときにウインドウを閉じず次回復元する
+# Restore open documents and windows when re-opened
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
 
 #--------------------
@@ -50,32 +43,34 @@ defaults write com.apple.dock wvous-bl-corner -int 4
 # Dock
 #--------------------
 
-# magnification
+# Set agnification on
 defaults write com.apple.dock magnification -bool true
 
-# size
+# Icon size
 defaults write com.apple.dock tilesize -int 40
 defaults write com.apple.dock largesize -int 60
 
-# Window title bar double click
+# Double-click a window's title bar to zoom
 defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
 
-# Minimize to application
+# Minimize windows into application icon
 defaults write com.apple.dock minimize-to-application -bool true
 
-# Disable launch animation
+# Don't animate opening applications
 defaults write com.apple.dock launchanim -bool false
 
-# Enable autohide
+# Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
-# Show indicator
+# Show indicators for open applications
 defaults write com.apple.dock show-process-indicators -bool true
 
-# Show recents
+# Show recent applications in Dock
 defaults write com.apple.dock show-recents -bool true
 
-# Remove the auto-hiding Dock delay
+
+# **Unpublic settings**
+# Remove the auto-hiding delay
 defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
@@ -84,6 +79,21 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 # Mission Control
 #--------------------
 
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+#--------------------
+# Siri
+#--------------------
+
+# See below "Menu bar"
+
+#--------------------
+# Spotlight
+#--------------------
+
+# TODO: Exclude some directories (mainly external drives)
+
 #--------------------
 # Language & Region
 #--------------------
@@ -91,57 +101,125 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 # 日付の書式設定等は変更のたびに下部の表示例を動的に変えているっぽい
 
 #--------------------
+# Notification
+#--------------------
+
+# Do Not Disturb
+# Turn on DND When the display is sleeping
+defaults -currentHost write com.apple.notificationcenterui dndEnabledDisplaySleep -bool true
+
+# Turn on DND When the display is locked
+defaults -currentHost write com.apple.notificationcenterui dndEnabledDisplayLock -bool true
+
+#--------------------
+# Internet Accounts
+#--------------------
+
+#--------------------
+# Wallet & Apple Pay
+#--------------------
+
+#--------------------
+# Touch ID
+#--------------------
+
+#--------------------
+# Users & Groups
+#--------------------
+
+# See below "Menu bar" (Login Options)
+
+#--------------------
+# Accessibility
+#--------------------
+
+# Pointer Control
+
+# Double-click speed (threshold)
+defaults write NSGlobalDomain com.apple.mouse.doubleClickThreshold -float 0.2
+
+# Spring-loading delay
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
+
+
+# Trackpad option
+
+# Maximize scrolling speed
+defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 1
+
+# Enable three-finger drag
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true
+
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+
+
+# Mouse-keys option Alternate Control Methods
+
+# Use Mouse-keys by pushing Option key five times
+defaults write com.apple.universalaccess useMouseKeysShortcutKeys -bool true
+
+# Disable trackpad while using Mouse-keys
+defaults write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
+
+#--------------------
+# Screen Time
+#--------------------
+
+#--------------------
+# Extensions
+#--------------------
+
+#--------------------
 # Security & Privacy
 #--------------------
 
 # May not be configurable by defaults command
 
-#--------------------
-# Spotlight
-#--------------------
-
-# TODO: excluding
 
 #--------------------
-# Notification
+# Software Update
+#--------------------
+
+# May not be configurable by defaults command
+
+#--------------------
+# Network
 #--------------------
 
 #--------------------
-# Displays
+# Bluetooth
 #--------------------
 
-# Enable HiDPI display modes (requires restart)
-# ?
-# sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
-
-# Show mirroring option on menu bar if available
-defaults write com.apple.airplay showInMenuBarIfPresent -bool true
+# See below "Menu bar"
 
 #--------------------
-# Energy Saver
+# Sound
 #--------------------
 
-IS_LAPTOP=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book")
-if [[ "$IS_LAPTOP" != "" ]]; then
-  sudo pmset -b displaysleep 10 sleep 15 lessbright 0
-  sudo pmset -c displaysleep 120 sleep 180
-  sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
-else
-  sudo pmset sleep 0 disksleep 0 displaysleep 180 halfdim 1
-fi
+#--------------------
+# Printers & Scanners
+#--------------------
 
 #--------------------
 # Keyboard
 #--------------------
 
-# Increase key repeat
+# See below "Menu bar"
+
+
+# Keyboard
+
+# Set Key Repeat
 defaults write NSGlobalDomain KeyRepeat -int 1
 
-# Decrease key repeat delay
-
+# Set Delay Until Repeat
 defaults write NSGlobalDomain InitialKeyRepeat -int 13
 
-# Text settings
+
+# Text
 
 # Disable automatic spelling correction
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -157,10 +235,12 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Keyboard shortcut settings
+# Shortcuts
 
 # Switching to the next window
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+# TODO: Check the default setting
+#defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+
 
 # input sources
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><false/></dict>"
@@ -191,11 +271,6 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dic
 # Hide Siri
 defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.brightness com.apple.system.volume com.apple.system.mute
 
-
-#--------------------
-# Mouse
-#--------------------
-
 #--------------------
 # Trackpad
 #--------------------
@@ -208,70 +283,44 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
 
 # Make click silent (only for MacBook series before 2016)
 # see also: https://support.apple.com/ja-jp/HT204352
-# defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
+#defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
 
 # Enable Expose gesture
 defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 
 #--------------------
-# Printers & Scanners
+# Mouse
 #--------------------
 
 #--------------------
-# Sound
+# Displays
+#--------------------
+
+# Enable HiDPI display modes (requires restart)
+# TODO: Check validity
+#sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+# Show mirroring options in menu bar when available
+defaults write com.apple.airplay showInMenuBarIfPresent -bool true
+
+#--------------------
+# Sidecar
 #--------------------
 
 #--------------------
-# Startup Disk
+# Energy Saver
 #--------------------
 
-#--------------------
-# iCloud
-#--------------------
+# See below "Menu bar"
 
-#--------------------
-# Internet Accounts
-#--------------------
-
-#--------------------
-# Wallet & Apple Pay
-#--------------------
-
-#--------------------
-# Software Update
-#--------------------
-
-#--------------------
-# Network
-#--------------------
-
-#--------------------
-# Bluetooth
-#--------------------
-
-#--------------------
-# Extensions
-#--------------------
-
-#--------------------
-# Sharing
-#--------------------
-
-#--------------------
-# Touch ID
-#--------------------
-
-#--------------------
-# Users & Groups
-#--------------------
-
-#--------------------
-# Parental Controls
-#--------------------
-
-#--------------------
-# Siri
-#--------------------
+IS_LAPTOP=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book")
+if [[ "$IS_LAPTOP" != "" ]]; then
+  sudo pmset -b displaysleep 10 sleep 15 lessbright 0
+  sudo pmset -c displaysleep 120 sleep 180
+  sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
+else
+  sudo pmset sleep 0 disksleep 0 displaysleep 180 halfdim 1
+fi
 
 #--------------------
 # Date & Time
@@ -280,50 +329,24 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 # Disable auto setting of timezone
 sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool false
 
-# see below "Menu bar"
+# Clock
+# See below "Menu bar"
+
+#--------------------
+# Sharing
+#--------------------
 
 #--------------------
 # Time Machine
 #--------------------
 
+# See below "Menu bar"
+
 #--------------------
-# Accessibility
+# Startup Disk
 #--------------------
 
-# Mouse and Trackpad
 
-# Mouse-keys option
-
-# Use Mouse-keys by pushing Option key five times
-defaults -currentHost write com.apple.universalaccess useMouseKeysShortcutKeys -bool true
-
-# Disable trackpad while using Mouse-keys
-defaults -currentHost write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
-
-
-# Set double click threshold
-defaults write NSGlobalDomain com.apple.mouse.doubleClickThreshold -float 0.2
-
-# Set spring loading delay
-defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
-
-# Trackpad option
-
-# Maximize scroll speed
-defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 1
-
-# Enable three-finger drag
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true
-
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
-
-# Enable drag lock
-#defaults write com.apple.AppleMultitouchTrackpad DragLock -bool true
-#defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
-#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool true
-#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
 
 #--------------------
 # Menu bar
@@ -335,27 +358,28 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 # Siri
 defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
-# Fast user switch menu, see: Preferences > User & Group > Login option
-# defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool true
+# Users & Groups > Login Options (fast user switch menu)
+#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool true
 defaults write NSGlobalDomain userMenuExtraStyle -int 2
 
-# Clock
-defaults write com.apple.menuextra.clock DateFormat -string "M\u6708d\u65e5(EEE)  H:mm:ss"
 
-# IME
-defaults write com.apple.menuextra.textinput ModeNameVisible -bool false
-
-# Battery
-defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+# Network (VPN)
+#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn" -bool false
 
 # Bluetooth
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -bool true
 
+# Keyboard (Input Sources)
+defaults write com.apple.menuextra.textinput ModeNameVisible -bool false
+
+# Energy Saver (battery status)
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+
+# Date & Time (Clock)
+#defaults write com.apple.menuextra.clock DateFormat -string "M\u6708d\u65e5(EEE)  H:mm:ss"
+
 # Time Machine
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" -bool true
-
-# VPN
-defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn" -bool false
 
 
 # Show icons on menu bar
@@ -366,7 +390,6 @@ defaults write com.apple.systemuiserver menuExtras -array \
 "/System/Library/CoreServices/Menu Extras/Battery.menu" \
 "/System/Library/CoreServices/Menu Extras/Volume.menu" \
 "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-"/System/Library/CoreServices/Menu Extras/VPN.menu" \
 "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
 "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
 
@@ -378,8 +401,8 @@ killall SystemUIServer
 
 # Set Desktop as the default location for new Finder windows
 # For other paths, use `PfLo` and `file:///full/path/here/`
-# defaults write com.apple.finder NewWindowTarget -string "PfDe"
-# defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+#defaults write com.apple.finder NewWindowTarget -string "PfDe"
+#defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
@@ -393,7 +416,7 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 
 # Display full POSIX path as Finder window title
-# defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+#defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
@@ -481,30 +504,7 @@ fi
 # iTerm2
 #--------------------
 
-# Install the Solarized Dark theme for iTerm
-# if "Solarized Dark Modified" colorscheme is already installed;
-if defaults read com.googlecode.iterm2 "Custom Color Presets" | grep "Solarized Dark Modified" >/dev/null 2>&1; then
-  :
-else
-  open "others/Solarized Dark Modified.itermcolors"
-fi
-
-# Increase maximum memory consumption per session
-defaults write com.googlecode.iterm2 IRMemory -int 64
-
-# Disable copy selection
-defaults write com.googlecode.iterm2 CopySelection -bool false
-
-# Disable window adjusting by font size
-defaults write com.googlecode.iterm2 AdjustWindowForFontSizeChange -bool false
-
-# Increase tmux dashboard limit
-defaults write com.googlecode.iterm2 TmuxDashboardLimit -int 30
-
-# Don't show tab bar in full screen
-defaults write com.googlecode.iterm2 ShowFullScreenTabBar -bool false
-
-# Profile TODO
+# Preferences file currently synced by `Backup and Sync from Google` (Google Drive)
 
 #--------------------
 # Activity Monitor
@@ -513,33 +513,34 @@ defaults write com.googlecode.iterm2 ShowFullScreenTabBar -bool false
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
-# Dock icon
-defaults write com.apple.ActivityMonitor IconType -int 2
+# Dock icon (CPU History)
+defaults write com.apple.ActivityMonitor IconType -int 6
 
-# Show all processes in Activity Monitor (TODO: research)
+# Show all processes in Activity Monitor
+# TODO: Check valid values
 #defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
 #--------------------
 # Photos
 #--------------------
 
-# Prevent Photos from opening automatically when devices are plugged in (TODO: research)
+# Prevent Photos from opening automatically when devices are plugged in
+# TODO: Check validity
 #defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 #--------------------
 # Others
 #--------------------
 
-# Don’t automatically rearrange Spaces based on most recent use
-defaults write com.apple.dock mru-spaces -bool false
-
+# **Unpublic settings**
 # Remove shadow from captured screenshots
 defaults write com.apple.screencapture disable-shadow -boolean true
-
 # Change the default directory which screenshots are saved in
-defaults write com.apple.screencapture location ~/Pictures/ScreenShots/
+# Check validity
+#defaults write com.apple.screencapture location ~/Pictures/ScreenShots/
 
-# Enable Touch ID authentication in terminal (require gnu-sed: brew install gnu-sed)
+# Enable Touch ID authentication in terminal (gnu-sed required. To install: brew install gnu-sed)
+
 # if Touch ID is already enabled for sudo command;
 if cat /etc/pam.d/sudo | grep "pam_tid.so" >/dev/null 2>&1; then
   :
@@ -549,6 +550,7 @@ fi
 
 
 # killall
+# TODO: Reboot is preferable ?
 
 for app in "Activity Monitor" \
   "cfprefsd" \

@@ -137,14 +137,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/texbin"
 # refer: /etc/paths.d/TeX
 
-## These settings add to PATH
-# rbenv settings
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-# Android SDK
-# export PATH="$PATH:/Users/shunsuke/Library/Android/sdk/platform-tools"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -205,10 +197,10 @@ if [ -f '/Users/shunsuke/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/shunsu
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/shunsuke/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/shunsuke/google-cloud-sdk/completion.zsh.inc'; fi
 
-# pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
+# anyenv
+if command -v anyenv 1>/dev/null 2>&1; then
+  eval "$(anyenv init -)"
 fi

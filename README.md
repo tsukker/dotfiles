@@ -4,23 +4,12 @@ The strongest configuration I thought up
 
 ## Environment
 
-macOS iTerm2 (Terminal)
+- macOS Terminal.app (iTerm.app)
+- (Linux version: TBD)
 
 ## Usage
 
 ### macOS
-
-#### memo
-
-Install apps:
-
-- Google Japanese Input
-  - preferences > IME
-  - preferences > Keyboard shortcuts
-- Google Chrome
-- 1Password
-- iTerm2
-- Alfred
 
 #### Configure
 
@@ -31,9 +20,20 @@ cd dotfiles
 sh ./macos.sh
 ```
 
+#### Manual Operations (Optional)
+
+- IME
+  - preferences > IME
+  - preferences > Keyboard shortcuts
+- Change display resolution
+- Disable auto setting of timezone
+- Enable Mouse Keys and turn Five-Alt setting on
+
 #### Neovim
 
 ```vim
 :PlugInstall
 :PlugStatus
 ```
+
+TODO

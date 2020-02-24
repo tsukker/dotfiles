@@ -315,8 +315,8 @@ defaults write com.apple.airplay showInMenuBarIfPresent -bool true
 
 IS_LAPTOP=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book")
 if [[ "$IS_LAPTOP" != "" ]]; then
-  sudo pmset -b displaysleep 10 sleep 15 lessbright 0
-  sudo pmset -c displaysleep 120 sleep 180
+  sudo pmset -b displaysleep 10 disksleep 15 sleep 15 lessbright 0
+  sudo pmset -c displaysleep 120 disksleep 180 sleep 180
   sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
 else
   sudo pmset sleep 0 disksleep 0 displaysleep 180 halfdim 1
@@ -565,5 +565,5 @@ for app in "Activity Monitor" \
   :#killall "${app}" &> /dev/null 2>&1
 done
 
-echo "Configuration is correctly finished."
-echo "Please reboot to ensure that changes are enabled."
+echo "Configuration completed successfully."
+echo "Reboot the computer so that changes are surely applied."

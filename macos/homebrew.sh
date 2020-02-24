@@ -10,3 +10,13 @@ fi
 
 # Install formula
 brew bundle --file=~/dotfiles/macos/Brewfile
+
+envs="pyenv rbenv"
+for somenv in $(echo $envs)
+do
+  if anyenv envs | grep $somenv >/dev/null 2>&1; then
+    :
+  else
+    anyenv install $somenv
+  fi
+done

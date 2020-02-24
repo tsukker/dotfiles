@@ -10,13 +10,11 @@ zplug "b4b4r07/enhancd", \
 zplug "junegunn/fzf-bin", \
     as:command, \
     from:gh-r, \
-    rename-to:"fzf", \
-    frozen:1
+    rename-to:"fzf"
 
 zplug "peco/peco", \
     as:command, \
-    from:gh-r, \
-    frozen:1
+    from:gh-r
 
 zplug "zsh-users/zsh-completions"
 

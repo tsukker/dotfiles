@@ -156,12 +156,12 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool t
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
 
-# Mouse-keys option Alternate Control Methods
+# Mouse Keys option Alternate Control Methods
 
-# Use Mouse-keys by pushing Option key five times
+# # Press the Option key five times to toggle Mouse Keys
 defaults write com.apple.universalaccess useMouseKeysShortcutKeys -bool true
 
-# Disable trackpad while using Mouse-keys
+# # Ignore built-in trackpad when Mouse Keys is on
 defaults write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
 
 #--------------------
@@ -319,7 +319,7 @@ if [[ "$IS_LAPTOP" != "" ]]; then
   sudo pmset -c displaysleep 120 disksleep 180 sleep 180
   sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
 else
-  sudo pmset sleep 0 disksleep 0 displaysleep 180 halfdim 1
+  sudo pmset displaysleep 180 disksleep 0 sleep 0 halfdim 1
 fi
 
 #--------------------

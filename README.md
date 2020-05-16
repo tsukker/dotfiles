@@ -11,6 +11,8 @@ The strongest configuration I thought up
 
 ### macOS
 
+First of all, Xcode is needed to be installed from App Store to use `git` command.
+
 #### Configure
 
 ```sh

@@ -1,3 +1,7 @@
+# Remove '#' in the next line for profiling zsh init.
+
+#zmodload zsh/zprof && zprof
+
 # MANPATH settings
 
 export MANPATH="/usr/local/man:$MANPATH"
@@ -35,12 +39,7 @@ zshaddhistory() {
   local cmd=${line%% *}
 
   # 以下の条件をすべて満たすものだけをヒストリに追加する
-  [[ ${cmd} != (l[sa])
-  && ${cmd} != (man)
-  && ${cmd} != (pwd)
-  && ${cmd} != (which)
-  && ${cmd} != (info)
-  && ${cmd} != (clnag++)
+  [[ ${cmd} != (pwd)
   && ${cmd} != (history)
   ]]
 }

@@ -170,7 +170,7 @@ zinit wait"0" lucid light-mode for\
     b4b4r07/enhancd \
     zsh-users/zsh-completions \
     zsh-users/zsh-history-substring-search \
-    zdharma/fast-syntax-highlighting \
+    zsh-users/zsh-syntax-highlighting \
 
 # End of zinit plugins
 #COMMENTOUT

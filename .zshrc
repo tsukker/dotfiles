@@ -136,7 +136,7 @@ if command -v anyenv 1>/dev/null 2>&1; then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
-
+export PATH="$HOME/go/bin:$PATH"
 
 #<< COMMENTOUT
 ### Added by Zinit's installer
@@ -163,14 +163,15 @@ zinit light-mode for \
 
 #zinit ice proto'git' pick'init.sh'; zinit light b4b4r07/enhancd  # See below
 
-zinit ice from"gh-r" as"program"; zinit load junegunn/fzf-bin
-#zinit ice from"gh-r" as"program"; zinit load peco/peco  # Temporarily disabled because peco can be installed by Homebrew
+#zinit ice from"gh-r" as"program"; zinit load junegunn/fzf-bin  # disabled because fzf can be installed by Homebrew
+#zinit ice from"gh-r" as"program"; zinit load peco/peco  # disabled because peco can be installed by Homebrew
 
 zinit wait"0" lucid light-mode for\
     b4b4r07/enhancd \
     zsh-users/zsh-completions \
     zsh-users/zsh-history-substring-search \
     zsh-users/zsh-syntax-highlighting \
+#    marlonrichert/zsh-edit \  # An example of using `main` as default branch
 
 # End of zinit plugins
 #COMMENTOUT
@@ -192,6 +193,8 @@ alias ls='ls'
 alias ls='ls -hFG'
 alias la='ls -hFG -lA -T'
 alias lt='ls -hFG -lAT'
+# reload shell (~/.zshrc etc.)
+alias reload='exec zsh -l'
 # ghq
 alias ghqlk='cd $(ghq root)/$(ghq list | fzf)'
 
@@ -227,6 +230,9 @@ zle -N fzf-history-selection
 #bindkey '^r' peco-history-selection
 bindkey '^r' fzf-history-selection
 
+# fzf setting
+# See: https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Profiling (See the head of .zshenv)
 if (which zprof > /dev/null) ;then

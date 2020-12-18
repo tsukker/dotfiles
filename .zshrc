@@ -184,15 +184,10 @@ alias gww='g++ -std=c++14 -O2 -Wall -Wextra'
 alias clangww='clang++ -std=c++14 -O2 -Wall -Wextra'
 alias clang++_atcoder='clang++ -I/usr/local/include/c++/v1 -L/usr/local/lib -I/opt/local/include/boost -L/opt/local/lib -std=c++14 -stdlib=libc++ -O2 -Wall -Wextra'
 alias xx='clang++ -std=c++14 -O2 -Wall -Wextra -o x' # example
-alias info='info --vi-keys'
 alias cd..='cd ..'
-alias diff=colordiff
-#alias rm=rmtrash
 # ls aliases
-alias ls='ls'
-alias ls='ls -hFG'
-alias la='ls -hFG -lA -T'
-alias lt='ls -hFG -lAT'
+alias ls='ls -FG'
+alias la='ls -FG -A -lhT'
 # reload shell (~/.zshrc etc.)
 alias reload='exec zsh -l'
 # ghq
@@ -207,10 +202,6 @@ function runcc() {
   shift
   ./a.out $@
 }
-
-# Omission of cd & ls
-setopt auto_cd
-function chpwd() { ls }
 
 function peco-history-selection() {
   BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`

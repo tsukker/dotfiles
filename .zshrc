@@ -98,6 +98,8 @@ add-zsh-hook precmd _precmd_vcs_info
 
 # Added by homebrew
 export PATH="/usr/local/sbin:$PATH"
+# Homebrew path for macOS Big Sur or newer
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

@@ -43,7 +43,7 @@ defaults write com.apple.dock wvous-bl-corner -int 4
 # Dock
 #--------------------
 
-# Set agnification on
+# Set magnification on
 defaults write com.apple.dock magnification -bool true
 
 # Icon size

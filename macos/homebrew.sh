@@ -1,6 +1,10 @@
 #!/bin/zsh
 cd `dirname $0`
 
+# Ask for the administrator password upfront
+sudo -v
+
+
 # Install Homebrew
 
 if type -a brew >/dev/null 2>&1; then

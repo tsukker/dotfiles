@@ -13,13 +13,8 @@ else
   zsh homebrew.sh
 fi
 
-# mkdir excluded >/dev/null 2>&1
-# wget -O "excluded/Solarized Dark.terminal" "https://raw.githubusercontent.com/tomislav/osx-terminal.app-colors-solarized/master/Solarized Dark.terminal"
-
-# if "Solarized Dard" colorscheme is already installed in Terminal.app;
-if defaults read com.apple.Terminal "Window Settings" | grep "Solarized Dark" >/dev/null 2>&1; then
-  :
-else
+# Regardless of whether "Solarized Dark" color theme is installed to Terminal.app or not,
+# the script below is executed because it is idempotent.
 
 osascript <<EOD
 tell application "Terminal"
@@ -63,5 +58,3 @@ tell application "Terminal"
   end repeat
 end tell
 EOD
-
-fi

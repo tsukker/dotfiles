@@ -343,7 +343,7 @@ sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool fa
 # Since there are many changes on menu bar in macOS Big Sur,
 # These settings should be done manually for a while.
 
-<< COMMENTOUT
+: << COMMENTOUT
 
 # $ defaults read com.apple.systemuiserver
 # see also: /System/Library/CoreServices/Menu\ Extras
@@ -514,7 +514,7 @@ defaults write com.apple.screencapture disable-shadow -boolean true
 
 # Enable Touch ID authentication in terminal (gnu-sed required. To install: brew install gnu-sed)
 
-<< COMMENTOUT
+: << COMMENTOUT
 
 # if Touch ID is already enabled for sudo command;
 if cat /etc/pam.d/sudo | grep "pam_tid.so" >/dev/null 2>&1; then

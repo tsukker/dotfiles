@@ -184,7 +184,8 @@ fi
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
-#<< COMMENTOUT
+# : << COMMENTOUT
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -220,7 +221,8 @@ zinit wait"0" lucid light-mode for\
 #    marlonrichert/zsh-edit \  # An example of using `main` as default branch
 
 # End of zinit plugins
-#COMMENTOUT
+
+# COMMENTOUT
 
 
 # Alias settings

@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/zsh
 
-sh link.sh
-sh macos/homebrew.sh
-sh macos/defaults.sh
-sh macos/other.sh
+zsh link.sh
+zsh macos/homebrew.sh
+zsh macos/defaults.sh
+zsh macos/other.sh

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -444,7 +444,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 if type -a wget >/dev/null 2>&1; then
   :
 else
-  sh homebrew.sh
+  zsh homebrew.sh
 fi
 
 # mkdir excluded >/dev/null 2>&1

@@ -19,7 +19,7 @@ First of all, Xcode is needed to be installed from App Store to use `git` comman
 cd ~
 git clone 'https://github.com/tsukker/dotfiles.git'
 cd dotfiles
-sh ./macos.sh
+zsh ./macos.sh
 ```
 
 #### Manual Operations (Optional)

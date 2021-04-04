@@ -1,4 +1,5 @@
 #!/bin/zsh
+cd `dirname $0`
 
 # Neovim: Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \

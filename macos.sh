@@ -1,4 +1,5 @@
 #!/bin/zsh
+cd `dirname $0`
 
 zsh link.sh
 zsh macos/homebrew.sh

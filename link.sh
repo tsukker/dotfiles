@@ -1,4 +1,5 @@
 #!/bin/zsh
+cd `dirname $0`
 
 # ln cheat-sheet
 # ln -sf [path of the real file (if relative from symbolic link)] [path of symbolic link (if relative from working directory]
@@ -7,7 +8,7 @@
 dotfiles=".editorconfig .tmux.conf .vim .vimrc .zshenv .zshrc .gitignore_global"
 for dotfile in $(echo $dotfiles)
 do
-  ln -sf ~/dotfiles/$dotfile ~/
+  ln -sf $(pwd)/$dotfile ~/
 done
 
 # ~/.gitconfig
@@ -19,5 +20,5 @@ mkdir ~/.config > /dev/null 2>&1
 configdirs="nvim"
 for dir in $configdirs
 do
-  ln -sf ~/dotfiles/.config/$dir ~/.config/
+  ln -sf $(pwd)/.config/$dir ~/.config/
 done

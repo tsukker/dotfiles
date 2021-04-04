@@ -1,4 +1,5 @@
 #!/bin/zsh
+cd `dirname $0`
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change

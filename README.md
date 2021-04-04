@@ -16,9 +16,17 @@ First of all, Xcode is needed to be installed from App Store to use `git` comman
 #### Configure
 
 ```sh
-cd ~
+cd [/any/path/you/want]
 git clone 'https://github.com/tsukker/dotfiles.git'
 cd dotfiles
+zsh ./macos.sh
+```
+
+Or, you can use [ghq](https://github.com/x-motemen/ghq) instead.
+
+```sh
+ghq get tsukker/dotfiles
+cd ~/ghq/github.com/tsukker/dotfiles
 zsh ./macos.sh
 ```
 

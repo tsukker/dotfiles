@@ -1,4 +1,5 @@
 #!/bin/zsh
+cd `dirname $0`
 
 # Install Homebrew
 
@@ -9,7 +10,7 @@ else
 fi
 
 # Install formula
-brew bundle --file=~/dotfiles/macos/Brewfile
+brew bundle --file=$(pwd)/Brewfile
 
 envs="pyenv rbenv"
 for somenv in $(echo $envs)

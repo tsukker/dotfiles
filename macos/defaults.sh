@@ -2,7 +2,7 @@
 cd `dirname $0`
 
 # Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
+# settings you are about to change
 osascript -e 'tell application "System Preferences" to quit'
 # killall System\ Preferences
 
@@ -36,9 +36,7 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
 defaults -currentHost write com.apple.screensaver idleTime -int 0
 
 # Hot corners (Bottom-Left, Show Desktop)
-# NOTICE: if you put 'sudo' before commands, preferences may not be propagated correctly.
-defaults write com.apple.dock wvous-bl-modifier -int 0
-defaults write com.apple.dock wvous-bl-corner -int 4
+# This setting should be done manually.
 
 #--------------------
 # Dock
@@ -71,8 +69,10 @@ defaults write com.apple.dock show-recents -bool true
 
 
 # **Unpublic settings**
+
 # Remove the auto-hiding delay
 defaults write com.apple.dock autohide-delay -float 0
+
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
 
@@ -213,6 +213,8 @@ defaults write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
 
 # Keyboard
 
+# **Unpublic settings**
+
 # Set Key Repeat
 defaults write NSGlobalDomain KeyRepeat -int 1
 
@@ -239,38 +241,25 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Shortcuts
 
 # Switching to the next window
-# TODO: Check the default setting
-#defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
-
+# Default is Command + F1.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
 
 # input sources
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><false/></dict>"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>106</integer><integer>38</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
 
 # Spotlight
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
 
-# IME setting seems to be difficult to configure by defaults command
-
-#defaults write com.apple.HIToolbox AppleEnabledInputSources -array \
-#'{ "Bundle ID" = "com.apple.PressAndHold"; InputSourceKind = "Non Keyboard Input Method"; }' \
-#'{ "Bundle ID" = "com.google.inputmethod.Japanese"; "Input Mode" = "com.apple.inputmethod.Japanese"; InputSourceKind = "Input Mode"; }' \
-#'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }' \
-#'{ "Bundle ID" = "com.google.inputmethod.Japanese"; InputSourceKind = "Keyboard Input Method"; }'
-
-#defaults write com.apple.HIToolbox AppleInputSourceHistory -array \
-#'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }' \
-#'{ "Bundle ID" = "com.google.inputmethod.Japanese"; "Input Mode" = "com.apple.inputmethod.Japanese"; InputSourceKind = "Input Mode"; }'
-
-#defaults write com.apple.HIToolbox AppleSelectedInputSources -array \
-#'{ "Bundle ID" = "com.apple.PressAndHold"; InputSourceKind = "Non Keyboard Input Method"; }' \
-#'{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 0; "KeyboardLayout Name" = "U.S."; }'
+# IME setting seems to be difficult to configure by defaults command.
+# This setting should be done by manually.
 
 
-# Touch Bar
+# Touch Bar (Keyboard > Customize Control Strip)
 
-# Hide Siri
+# Erase Siri
 defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.brightness com.apple.system.volume com.apple.system.mute
+killall ControlStrip
 
 #--------------------
 # Trackpad
@@ -297,9 +286,7 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 # Displays
 #--------------------
 
-# Enable HiDPI display modes (requires restart)
-# TODO: Check validity
-#sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+# You only can enable HiDPI display mode manually.
 
 # Show mirroring options in menu bar when available
 defaults write com.apple.airplay showInMenuBarIfPresent -bool true
@@ -353,19 +340,23 @@ sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool fa
 # Menu bar
 #--------------------
 
+# Since there are many changes on menu bar in macOS Big Sur,
+# These settings should be done manually for a while.
+
+<< COMMENTOUT
+
 # $ defaults read com.apple.systemuiserver
 # see also: /System/Library/CoreServices/Menu\ Extras
 
-# Siri
-defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
+
+# Erase Siri (confirmed valid for macOS 10.15.7 and 11.2.3)
+# The second line is confirmed unnecessary, but actually modified when manipulated by GUI.
+defaults write com.apple.Siri StatusMenuVisible -bool false
+#defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 # Users & Groups > Login Options (fast user switch menu)
 #defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser" -bool true
 defaults write NSGlobalDomain userMenuExtraStyle -int 2
-
-
-# Network (VPN)
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn" -bool false
 
 # Bluetooth
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -bool true
@@ -387,28 +378,78 @@ defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextr
 # Note that the order of icons is statically decided after `killall SystemUIServer`
 defaults write com.apple.systemuiserver menuExtras -array \
 "/System/Library/CoreServices/Menu Extras/Clock.menu" \
-"/System/Library/CoreServices/Menu Extras/TextInput.menu" \
 "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-"/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
+"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+"/System/Library/CoreServices/Menu Extras/Volume.menu" \
+"/System/Library/CoreServices/Menu Extras/Displays.menu" \
+"/System/Library/CoreServices/Menu Extras/TextInput.menu" \
+"/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
 
 killall SystemUIServer
+
+COMMENTOUT
 
 #--------------------
 # Finder
 #--------------------
 
-# Set Desktop as the default location for new Finder windows
-# For other paths, use `PfLo` and `file:///full/path/here/`
-#defaults write com.apple.finder NewWindowTarget -string "PfDe"
-#defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
-defaults write com.apple.finder NewWindowTarget -string "PfLo"
+# General
+
+# Set path of new window target.
+# Choose one from following options.
+
+# Computer
+#defaults write com.apple.finder NewWindowTarget -string "PfCm"
+
+# Volume (root directory)
+#defaults write com.apple.finder NewWindowTarget -string "PfVo"
+#defaults write com.apple.finder NewWindowTargetPath -string "file:///"
+
+# Home
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
-# Finder: show all filename extensions
+# Desktop
+#defaults write com.apple.finder NewWindowTarget -string "PfDe"
+#defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+
+# Documents
+#defaults write com.apple.finder NewWindowTarget -string "PfDo"
+#defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Documents/"
+
+# iCloud Drive
+#defaults write com.apple.finder NewWindowTarget -string "PfID"
+#defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Library/Mobile%20Documents/com~apple~CloudDocs/"
+
+# Recents
+#defaults write com.apple.finder NewWindowTarget -string "PfAF"
+#defaults write com.apple.finder NewWindowTargetPath -string "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch"
+
+# Other Locations
+#defaults write com.apple.finder NewWindowTarget -string "PfLo"
+##defaults write com.apple.finder NewWindowTargetPath -string "file:///any/location/"
+
+
+# Advanced
+
+# Show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Don't show warning before changing an extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# When performing a search,
+# "SCev": Search This Mac
+# "SCcf": Search the Current Folder
+# "SCcp": Use the Previous Search Scope
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+
+# **Unpublic settings**
 
 # Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -417,16 +458,8 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 
 # Display full POSIX path as Finder window title
+# Notice: The longer window titles are, the harder they are to read.
 #defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-
-# Keep folders on top when sorting by name
-defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-# When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
-# Disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -470,13 +503,18 @@ defaults write com.apple.ActivityMonitor IconType -int 6
 #--------------------
 
 # **Unpublic settings**
+
 # Remove shadow from captured screenshots
 defaults write com.apple.screencapture disable-shadow -boolean true
+
 # Change the default directory which screenshots are saved in
 # Check validity
 #defaults write com.apple.screencapture location ~/Pictures/ScreenShots/
 
+
 # Enable Touch ID authentication in terminal (gnu-sed required. To install: brew install gnu-sed)
+
+<< COMMENTOUT
 
 # if Touch ID is already enabled for sudo command;
 if cat /etc/pam.d/sudo | grep "pam_tid.so" >/dev/null 2>&1; then
@@ -485,6 +523,7 @@ else
   sudo gsed -i -e "2iauth       sufficient     pam_tid.so" /etc/pam.d/sudo
 fi
 
+COMMENTOUT
 
 # killall
 # TODO: Reboot is preferable ?

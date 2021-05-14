@@ -152,6 +152,26 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/texbin"
 # refer: /etc/paths.d/TeX
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
+
+# iTerm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+# anyenv
+if command -v anyenv 1>/dev/null 2>&1; then
+  eval "$(anyenv init -)"
+fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+
+# Java
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -166,23 +186,6 @@ export LANG=en_US.UTF-8
 # for tmux
 export TERM=xterm-256color
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/shunsuke/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/shunsuke/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/shunsuke/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/shunsuke/google-cloud-sdk/completion.zsh.inc'; fi
-
-# iTerm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
-
-# anyenv
-if command -v anyenv 1>/dev/null 2>&1; then
-  eval "$(anyenv init -)"
-fi
-
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
 
 # : << COMMENTOUT
 

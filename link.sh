@@ -5,7 +5,7 @@ cd `dirname $0`
 # ln -sf [path of the real file (if relative from symbolic link)] [path of symbolic link (if relative from working directory]
 
 # dotfiles under home directory
-dotfiles=".editorconfig .tmux.conf .vim .vimrc .zshenv .zshrc .gitignore_global"
+dotfiles=".editorconfig .tmux.conf .vim .vimrc .zshenv .zshrc"
 for dotfile in $(echo $dotfiles)
 do
   ln -sf $(pwd)/$dotfile ~/
@@ -17,8 +17,8 @@ git config --global core.editor 'vim -c "set fenc=utf-8"'
 
 # XDG Base Directory Specification
 mkdir ~/.config > /dev/null 2>&1
-configdirs="nvim"
-for dir in $configdirs
+configdirs="git nvim"
+for dir in $(echo $configdirs)
 do
   ln -sf $(pwd)/.config/$dir ~/.config/
 done

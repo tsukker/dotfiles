@@ -16,7 +16,7 @@ git config --global core.excludesfile ~/.gitignore_global  # Apply .gitignore_gl
 git config --global core.editor 'vim -c "set fenc=utf-8"'
 
 # XDG Base Directory Specification
-mkdir ~/.config > /dev/null 2>&1
+mkdir -p ~/.config
 configdirs="git nvim"
 for dir in $(echo $configdirs)
 do

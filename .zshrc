@@ -183,6 +183,8 @@ export LANG=en_US.UTF-8
 # for tmux
 export TERM=xterm-256color
 
+# Ctrl-w
+export WORDCHARS='~!#$%^&*(){}[]<>-_+;.?'
 
 # : << COMMENTOUT
 

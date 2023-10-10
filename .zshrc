@@ -166,8 +166,15 @@ if command -v anyenv 1>/dev/null 2>&1; then
   eval "$(anyenv init -)"
 fi
 
+# ↑ goenv だけなぜか PATH の最後尾に設定されるので明示的に前に付ける
+export PATH="$GOENV_ROOT/shims:$PATH"
+
+# Golang
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
+
+# Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
 
 
 # You may need to manually set your language environment

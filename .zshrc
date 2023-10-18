@@ -224,11 +224,11 @@ zinit light-mode for \
 #zinit ice from"gh-r" as"program"; zinit load peco/peco  # disabled because peco can be installed by Homebrew
 
 zinit wait"0" lucid light-mode for\
-    b4b4r07/enhancd \
     zsh-users/zsh-completions \
     zsh-users/zsh-history-substring-search \
     zsh-users/zsh-syntax-highlighting \
 #    marlonrichert/zsh-edit \  # An example of using `main` as default branch
+#    b4b4r07/enhancd \
 
 # End of zinit plugins
 

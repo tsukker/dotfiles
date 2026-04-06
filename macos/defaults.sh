@@ -13,59 +13,94 @@ sudo -v
 #while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 #--------------------
-# General
+# Appearance
 #--------------------
 
-# Set dark mode
+# Appearance: Dark
 defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
 
 # Show scroll bars: Always
 defaults write NSGlobalDomain AppleShowScrollBars -string Always
 
-# Ask to keep changes when closing documents
-defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
-
-# Restore open documents and windows when re-opened
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
-
 #--------------------
-# Desktop & Screen Saver
+# Accessibility
 #--------------------
 
-# Disable screensaver
-defaults -currentHost write com.apple.screensaver idleTime -int 0
+# Pointer Control
 
-# Hot corners (Bottom-Left, Show Desktop)
-# This setting should be done manually.
+# Double-click speed (threshold)
+defaults write NSGlobalDomain com.apple.mouse.doubleClickThreshold -float 0.2
+
+# Spring-loading delay
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
+
+
+# Trackpad option
+
+# Maximize scrolling speed
+defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 1
+
+# Enable Three Finger Drag
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true
+defaults write com.apple.AppleMultitouchTrackpad DragLock -bool false
+defaults write com.apple.AppleMultitouchTrackpad Dragging -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool false
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool false
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+
+
+# Alternate Control Methods
+
+# Press the Option key five times to toggle Mouse Keys
+#defaults write com.apple.universalaccess useMouseKeysShortcutKeys -bool true
+
+# Ignore built-in trackpad when Mouse Keys is on
+#defaults write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
 
 #--------------------
-# Dock
+# Control Center
 #--------------------
 
-# Set magnification on
+# WIP
+
+#--------------------
+# Desktop & Dock
+#--------------------
+
+# Magnification: On
 defaults write com.apple.dock magnification -bool true
 
-# Icon size
+# Icon Size
 defaults write com.apple.dock tilesize -int 40
 defaults write com.apple.dock largesize -int 60
 
-# Double-click a window's title bar to zoom
+# Double-click a window's title bar to: Zoom
 defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
 
-# Minimize windows into application icon
+# Minimize windows into application icon: On
 defaults write com.apple.dock minimize-to-application -bool true
 
-# Don't animate opening applications
-defaults write com.apple.dock launchanim -bool false
-
-# Automatically hide and show the Dock
+# Automatically hide and show the Dock: On
 defaults write com.apple.dock autohide -bool true
 
-# Show indicators for open applications
+# Animate opening applications: Off
+defaults write com.apple.dock launchanim -bool false
+
+# Show indicators for open applications: On
 defaults write com.apple.dock show-process-indicators -bool true
 
-# Show recent applications in Dock
+# Show suggested and recent apps in Dock
 defaults write com.apple.dock show-recents -bool true
+
+
+# Windows > Ask to keep changes when closing documents
+defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
+
+# Close windows when quitting an application: Off; open documents and windows will be restored when you re-open an application.
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
 
 
 # **Unpublic settings**
@@ -77,23 +112,128 @@ defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
 #--------------------
+# Battery
+#--------------------
+
+# Slightly dim the display on battery: Off
+# pmset command should have `lessbright` setting according to man page, but `pmset -g` does not show it in macOS 14.6
+
+# past setting
+: << COMMENTOUT
+IS_LAPTOP=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book")
+if [[ "$IS_LAPTOP" != "" ]]; then
+  sudo pmset -b displaysleep 10 disksleep 15 sleep 15 lessbright 0
+  sudo pmset -c displaysleep 120 disksleep 180 sleep 180
+  sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
+else
+  sudo pmset displaysleep 180 disksleep 0 sleep 0 halfdim 1
+fi
+COMMENTOUT
+
+#--------------------
+# Lock Screen
+#--------------------
+
+# Disable screensaver
+defaults -currentHost write com.apple.screensaver idleTime -int 0
+
+# Hot corners (Bottom-Left, Show Desktop)
+# This setting should be done manually.
+
+
+#--------------------
+# Keyboard
+#--------------------
+
+# Key repeat rate (faster than System Settings limit: 2)
+defaults write NSGlobalDomain KeyRepeat -int 1
+
+# Delay until repeat (shorter than System Settings limit: 15)
+defaults write NSGlobalDomain InitialKeyRepeat -int 13
+
+
+# Text input > Input Sorces > Edit...
+
+# Show Input menu in menu bar
+# -> Control Center
+
+# Correct spelling automatically: Off
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
+
+# Capitalize words automatically: Off
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Add period with double-space: Off
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Use smart quotes and dashes: Off
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+
+# Keyboard Shortcuts
+
+# Switching to the next window
+# Default is Command + F1.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+# input sources
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>106</integer><integer>38</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+# Spotlight
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
+
+# IME setting seems to be difficult to configure by defaults command.
+# This setting should be done by manually.
+
+
+# Touch Bar (Keyboard > Customize Control Strip)
+
+# Erase Siri
+defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.brightness com.apple.system.volume com.apple.system.mute
+killall ControlStrip
+
+#--------------------
+# Trackpad
+#--------------------
+
+## Point & Click
+
+# Tracking speed: Fastest
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
+
+# Click: Light
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
+defaults write com.apple.AppleMultitouchTrackpad SecondClickThreshold -int 0
+
+# Tap to click: On
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+# Make click silent (only for MacBook series before 2016)
+# see also: https://support.apple.com/ja-jp/HT204352
+#defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
+
+## Scroll & Zoom
+
+# Swipe between full-screen applications: Swipe Left or Right with Four Fingers
+defaults write com.apple.AppleMultitouchTrackpad -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+
+# Enable Expose gesture
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+
+
+
+
+#--------------------
 # Mission Control
 #--------------------
 
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
-
-#--------------------
-# Siri
-#--------------------
-
-# See below "Menu bar"
-
-#--------------------
-# Spotlight
-#--------------------
-
-# TODO: Exclude some directories (mainly external drives)
 
 #--------------------
 # Language & Region
@@ -130,40 +270,7 @@ defaults -currentHost write com.apple.notificationcenterui dndEnabledDisplayLock
 
 # See below "Menu bar" (Login Options)
 
-#--------------------
-# Accessibility
-#--------------------
 
-# Pointer Control
-
-# Double-click speed (threshold)
-defaults write NSGlobalDomain com.apple.mouse.doubleClickThreshold -float 0.2
-
-# Spring-loading delay
-defaults write NSGlobalDomain com.apple.springing.enabled -bool true
-defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
-
-
-# Trackpad option
-
-# Maximize scrolling speed
-defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 1
-
-# Enable three-finger drag
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true
-
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
-
-
-# Mouse Keys option Alternate Control Methods
-
-# # Press the Option key five times to toggle Mouse Keys
-defaults write com.apple.universalaccess useMouseKeysShortcutKeys -bool true
-
-# # Ignore built-in trackpad when Mouse Keys is on
-defaults write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
 
 #--------------------
 # Screen Time
@@ -204,79 +311,7 @@ defaults write com.apple.universalaccess mouseDriverIgnoreTrackpad -bool true
 # Printers & Scanners
 #--------------------
 
-#--------------------
-# Keyboard
-#--------------------
 
-# See below "Menu bar"
-
-
-# Keyboard
-
-# **Unpublic settings**
-
-# Set Key Repeat
-defaults write NSGlobalDomain KeyRepeat -int 1
-
-# Set Delay Until Repeat
-defaults write NSGlobalDomain InitialKeyRepeat -int 13
-
-
-# Text
-
-# Disable automatic spelling correction
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
-
-# Disable automatic capitalization
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-
-# Disable automatic period substitution
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-
-# Turn off smart quote/dash substitution
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
-# Shortcuts
-
-# Switching to the next window
-# Default is Command + F1.
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>96</integer><integer>50</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
-
-# input sources
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>106</integer><integer>38</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
-
-# Spotlight
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
-
-# IME setting seems to be difficult to configure by defaults command.
-# This setting should be done by manually.
-
-
-# Touch Bar (Keyboard > Customize Control Strip)
-
-# Erase Siri
-defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.brightness com.apple.system.volume com.apple.system.mute
-killall ControlStrip
-
-#--------------------
-# Trackpad
-#--------------------
-
-# Click by tapping
-defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-
-# Maximize speed of cursor
-defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
-
-# Make click silent (only for MacBook series before 2016)
-# see also: https://support.apple.com/ja-jp/HT204352
-#defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
-
-# Enable Expose gesture
-defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 
 #--------------------
 # Mouse
@@ -295,20 +330,7 @@ defaults write com.apple.airplay showInMenuBarIfPresent -bool true
 # Sidecar
 #--------------------
 
-#--------------------
-# Energy Saver
-#--------------------
 
-# See below "Menu bar"
-
-IS_LAPTOP=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book")
-if [[ "$IS_LAPTOP" != "" ]]; then
-  sudo pmset -b displaysleep 10 disksleep 15 sleep 15 lessbright 0
-  sudo pmset -c displaysleep 120 disksleep 180 sleep 180
-  sudo pmset -a standbydelaylow 1800 standbydelayhigh 10800
-else
-  sudo pmset displaysleep 180 disksleep 0 sleep 0 halfdim 1
-fi
 
 #--------------------
 # Date & Time
